@@ -6,7 +6,7 @@
    具体过程如下：
    1.创建基本的SpringBoot项目(该项目创建是基于
    Springboot1.5.2.RELEASE版本，由
-   https://start.spring.io/进行在线生成，如有需要请自行访问
+   https://start.spring.io/  进行在线生成，如有需要请自行访问
    该网站进行项目的在线下载)。
    2.修改pom文件，进行profiles节点的添加，添加内容如下：
        <profiles>
