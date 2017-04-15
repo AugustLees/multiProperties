@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.august</groupId>
+    <artifactId>multiProperties</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>multiProperties</name>
+    <description>基于SpringBoot的多配置文件测试项目</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.2.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--resource的filtering属性用来表示资源文件中的占位符是否需要被替换，true为需要替换-->
+                <filtering>true</filtering>
+                <!--引入资源文件信息-->
+                <includes>
+                    <include>application.properties</include>
+                    <include>application-${profiles.active}.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <!--设置开发环境信息-->
+        <profile>
+            <id>develop</id>
+            <properties>
+                <!--指定配置环境中引用的配置文件的环境  变量信息-->
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <!--设置为默认的激活节点-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <!--设置测试环境信息-->
+        <profile>
+            <id>test</id>
+            <properties>
+                <!--指定配置环境中引用的配置文件的环境  变量信息-->
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <!--设置生产环境信息-->
+        <profile>
+            <id>product</id>
+            <properties>
+                <!--指定配置环境中引用的配置文件的环境  变量信息-->
+                <profiles.active>prod</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+
+</project>
